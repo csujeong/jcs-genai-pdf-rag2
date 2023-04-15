@@ -80,27 +80,29 @@ def main():
     col1, col2, col3 = st.columns(3)
 
     # Button click event and input validation
-    if col2.button('Submit') and (uploaded_file is not None or temp_data!="data : ") :
-        embeddings = OpenAIEmbeddings()
-        docsearch = FAISS.from_texts(texts, embeddings)
-        chain = load_qa_chain(OpenAI(), chain_type="stuff")
+    if col2.button('Submit') and (uploaded_file is not None or temp_data!="data : "):
+        if api_key=="":
+            st.warning('Enter the OpenAI API Key', icon="⚠️")
+        else:
+            embeddings = OpenAIEmbeddings()
+            docsearch = FAISS.from_texts(texts, embeddings)
+            chain = load_qa_chain(OpenAI(), chain_type="stuff")
 
-        # Streamlit session state usage
-        if 'summry' not in st.session_state or  query == "query : ":
-            # """
-            # This condition checks if the 'summry' key is not present in the Streamlit session state, or if the input query is empty.
-            # If either of these conditions is true, it means that the summary is not computed yet or the user has cleared the query input.
-            # In such cases, the summarize_text() function is called to compute the summary and store it in the 'summry' key of the session state.
-            # """
-            # Call summarize_text() function
-            st.session_state['summry'] = summarize_text(texts, docsearch, chain)
-            st.write('Summary:', st.session_state['summry'])
+            # Streamlit session state usage
+            if 'summry' not in st.session_state or  query == "query : ":
+                # """
+                # This condition checks if the 'summry' key is not present in the Streamlit session state, or if the input query is empty.
+                # If either of these conditions is true, it means that the summary is not computed yet or the user has cleared the query input.
+                # In such cases, the summarize_text() function is called to compute the summary and store it in the 'summry' key of the session state.
+                # """
+                # Call summarize_text() function
+                st.session_state['summry'] = summarize_text(texts, docsearch, chain)
+                st.write('Summary:', st.session_state['summry'])
 
-
-        # Call answer_question() function
-        if query != "query : ":
-            txt = answer_question(query, docsearch, chain)
-            st.write('Output:', txt)
+            # Call answer_question() function
+            if query != "query : ":
+                txt = answer_question(query, docsearch, chain)
+                st.write('Output:', txt)
     else:
         st.write('Enter Your Query !')
 
