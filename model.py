@@ -47,7 +47,7 @@ def main():
     # """
     st.title('Summarization and Questioning Model')
 
-    api_key = st.text_input('Your Key', placeholder="Enter Your key")
+    api_key = st.text_input('Your OpenAI Key', placeholder="Enter Your key")
     os.environ["OPENAI_API_KEY"] = api_key
 
     raw_text = ''
