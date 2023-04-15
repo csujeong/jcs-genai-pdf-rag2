@@ -1,0 +1,101 @@
+
+---
+title: "Readme"
+author: "Jaspreet Singh"
+date: "2023-04-15"
+output: 
+  cleanrmd::html_document_clean:
+    toc: true
+    float_toc: true
+    theme: sakura
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  theme = "solarized-light",
+  fig.width = 6,
+  fig.height = 4,
+  fig.align = "center"
+)
+```
+
+### Get started 
+
+This is a web app to Summarize long text documents and query on that document. 
+
+<br> 
+Technologies used to built are: 
+<br>  
+- Lang chain framework<br>
+- FAISS Vector Database<br> 
+- Steamlit framework.<br>
+- OpenAi Api<br>
+
+### Setup
+
+Step 1:
+
+- Open your command prompt/bash.
+- Fork The Github [Repository](https://github.com/singhjaspreetb/Summerization-LLM).
+- Clone the repo from your repository use Command `git clone` repo link.
+- 
+<br>
+
+Step 2:
+
+- Install [Python](https://youtu.be/0QibxSdnWW4) on your system 
+<br>
+
+Step 3:
+Install langchain
+<br>
+Install openai
+<br>
+Install PyPDF2
+<br>
+Install faiss-cpu
+<br>
+Install tiktoken
+<br>
+Install streamlit
+
+### Approach To the Solution
+Before going to a solution, we need to understand the limitations:
+<br>
+•	A Chat-gpt3-like model has token limitations of 4096 to be precise.
+<br>
+•	These models have memory issues in that they tend to forget inputs after a long conversation and produce a result different from the user input.
+<br>
+•	These models tend to hallucinate.
+<br>
+•	These LLMs have large amounts of data from different fields and certain terminologies might mean something or a particular field and something else for the other.
+
+### Solution:
+•	Our goal is to create a Summarization tool that takes the long text and gives concise output. But during summarization we do not want to hit the token limit, for we take the .txt file and divide it into chunks so that it fits in the size of the token and we embed these chunks with openai embeddings.
+
+•	As these models have memory issues after embedding the chunks, we make a semantic index of these embeddings and store them in a vector database this can solve the memory issue.
+
+•	As for hallucination, we set the temperature of the model at a minimum as we do not need much creativity and need only to summarize the given file.
+
+•	For this issue I made the LLM access to the knowledge base of the model only to return output and if some terminology is asked it will reply based on the knowledge base provided. 
+
+
+ 
+### The architecture of the model
+ 
+
+### Usage
+•	The model can be used to summarize any long documents and gives concise summary output. It can be in form of bullet points or in paragraphs.
+<br>
+•	The model can be used as questions on the data previously stored or the recently given file which was stored in the knowledge base.
+
+
+
+### Limitations 
+•	Needs more processing power for faster response on longer documents
+<br>
+•	Can be more Optimized in terms of tuning and more Domain-specific knowledge can be fed to the model.
+
+   
+
