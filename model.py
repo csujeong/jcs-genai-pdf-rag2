@@ -55,12 +55,12 @@ def main():
 
     col1, col2, col3 = st.columns(3)
 
-    if col2.button('Submit'):
+    if col2.button('Submit') and (uploaded_file is not None or temp_data!="data : ") :
         embeddings = OpenAIEmbeddings()
         docsearch = FAISS.from_texts(texts, embeddings)
         chain = load_qa_chain(OpenAI(), chain_type="stuff")
 
-        if 'summry' not in st.session_state:  # Check if summary is already computed
+        if 'summry' not in st.session_state or  query == "query : ":  # Check if summary is already computed
             # Call summarize_text() function
             st.session_state['summry'] = summarize_text(texts, docsearch, chain)
             st.write('Summary:', st.session_state['summry'])
