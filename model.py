@@ -45,7 +45,7 @@ def main():
     # The function calls the summarize_text() and answer_question() functions to perform text summarization and question answering
     # respectively, and displays the results using Streamlit interface.
     # """
-    st.title('Summarization and Questioning Model')
+    st.title('RAG Based Summarize - Faiss DB')
 
     api_key = st.text_input('Your OpenAI Key', placeholder="Enter Your key")
     os.environ["OPENAI_API_KEY"] = api_key
@@ -53,7 +53,7 @@ def main():
     raw_text = ''
 
     # Upload PDF file
-    uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
+    uploaded_file = st.file_uploader("PDF 화일 선택", type="pdf")
     if uploaded_file is not None:
         reader = PdfReader(uploaded_file)
         for i, page in enumerate(reader.pages):
