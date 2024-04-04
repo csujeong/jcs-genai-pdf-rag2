@@ -47,7 +47,7 @@ def main():
     # """
     st.title('RAG Based Summarize - Faiss DB')
 
-    api_key = st.text_input('Your OpenAI Key', placeholder="Enter Your key")
+    api_key = st.text_input('Your OpenAI Key', type="password", placeholder="Enter Your key")
     os.environ["OPENAI_API_KEY"] = api_key
 
     raw_text = ''
